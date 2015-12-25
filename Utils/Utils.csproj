@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Utils</RootNamespace>
     <AssemblyName>Utils</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="File\JsonUtils.cs" />
+    <Compile Include="FullyObservableCollection\FullyObservableCollection.cs" />
     <Compile Include="Grid\DataGridColumnSettings.cs" />
     <Compile Include="Preference\PreferenceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

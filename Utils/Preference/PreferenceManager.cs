@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Utils.File;
 
 namespace Utils.Preference
@@ -23,7 +22,7 @@ namespace Utils.Preference
             if (_instance == null)
             {
                 _instance = new PreferenceManager(fileName);
-                LoadPreferences();
+                _preferences = LoadPreferences();
             }
             return _instance;
         }
@@ -35,28 +34,22 @@ namespace Utils.Preference
         }
 
 
-        private static async void LoadPreferences()
+        private static Dictionary<string, string> LoadPreferences()
         {
             if (System.IO.File.Exists(_fileName))
             {
-                _preferences = await _jsonUtils.ReadObjectAsync();
-
+                return _jsonUtils.ReadObject();
             }
-            else
-            {
-                _preferences = new Dictionary<string, string>();
-            }
-
+            return new Dictionary<string, string>();
         }
 
-        public async void SavePreferences()
+        public static void SavePreferences()
         {
-            await _jsonUtils.WriteObjectAsync(_preferences);
+            _jsonUtils.WriteObject(_preferences);
         }
 
         public static T GetPreference<T>(string name, T defaultValue)
         {
-            if (_preferences == null) throw new PreferenceException("Preferences not loaded");
             if (!_preferences.ContainsKey(name)) return defaultValue;
             var value = _preferences[name];
             return JsonUtils<T>.ReadJsonString(value);
@@ -71,7 +64,7 @@ namespace Utils.Preference
 
     public class PreferenceException : Exception
     {
-        public PreferenceException(string message):base(message)
+        public PreferenceException(string message) : base(message)
         {
         }
     }
