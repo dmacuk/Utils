@@ -53,16 +53,20 @@
   <ItemGroup>
     <Compile Include="File\JsonUtils.cs" />
     <Compile Include="FullyObservableCollection\FullyObservableCollection.cs" />
-    <Compile Include="Grid\DataGridColumnSettings.cs" />
     <Compile Include="Preference\PreferenceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="String\StringExtensions.cs" />
-    <Compile Include="Window\Windows.cs" />
-    <Compile Include="Window\WindowSettings.cs" />
+    <Compile Include="Window\Utils\Grid\DataGridColumnSettings.cs" />
+    <Compile Include="Window\Utils\Shared.cs" />
+    <Compile Include="Window\Utils\WindowContentLoader.cs" />
+    <Compile Include="Window\Utils\WindowContentSaver.cs" />
+    <Compile Include="Window\Utils\WindowLayout.cs" />
+    <Compile Include="Window\WindowsExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

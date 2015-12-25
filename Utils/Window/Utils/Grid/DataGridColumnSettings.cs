@@ -3,34 +3,36 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Utils.File;
 
-namespace Utils.Grid
+namespace Utils.Window.Utils.Grid
 {
     /// <summary>
-    /// Save/restore the columns settings of a DataGrid
+    ///     Save/restore the columns settings of a DataGrid
     /// </summary>
     public static class DataGridColumnSettings
     {
         /// <summary>
-        /// Get the supplied Datagrid's column settings
+        ///     Get the supplied Datagrid's column settings
         /// </summary>
         /// <param name="dg">A DataGrid</param>
         /// <returns></returns>
-        public static List<ColumnProperty> GetColumOptions(this DataGrid dg)
+        internal static List<ColumnProperty> GetColumOptions(this DataGrid dg)
         {
-            return dg.Columns.Select(column => new ColumnProperty(column.DisplayIndex, column.Width.DisplayValue, column.Visibility, column.SortDirection)).ToList();
+            return
+                dg.Columns.Select(
+                    column =>
+                        new ColumnProperty(column.DisplayIndex, column.Width.DisplayValue, column.Visibility,
+                            column.SortDirection)).ToList();
         }
 
         /// <summary>
-        /// Set the passed DataGrid's columns settings based on the passed XML
+        ///     Set the passed DataGrid's columns settings based on the passed XML
         /// </summary>
         /// <param name="dg">A DataGrid</param>
         /// <param name="columnProperties"></param>
-        public static void SetColumnOptions(this DataGrid dg, List<ColumnProperty> columnProperties)
+        internal static void SetColumnOptions(this DataGrid dg, List<ColumnProperty> columnProperties)
         {
             try
             {
@@ -44,7 +46,8 @@ namespace Utils.Grid
                     if (columnProperty.ListSortDescription.HasValue)
                     {
                         column.SortDirection = columnProperty.ListSortDescription;
-                        dg.Items.SortDescriptions.Add(new SortDescription(column.SortMemberPath, column.SortDirection.Value));
+                        dg.Items.SortDescriptions.Add(new SortDescription(column.SortMemberPath,
+                            column.SortDirection.Value));
                     }
                     columnCount++;
                 }
@@ -57,13 +60,14 @@ namespace Utils.Grid
     }
 
     /// <summary>
-    /// Holder for various DataGrid column properties
+    ///     Holder for various DataGrid column properties
     /// </summary>
     public class ColumnProperty
     {
 #pragma warning disable 1591
 
-        public ColumnProperty(int displayIndex, double width, Visibility visibility, ListSortDirection? listSortDirection)
+        public ColumnProperty(int displayIndex, double width, Visibility visibility,
+            ListSortDirection? listSortDirection)
         {
             DisplayIndex = displayIndex;
             Width = width;
