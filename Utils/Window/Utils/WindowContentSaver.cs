@@ -54,7 +54,8 @@ namespace Utils.Window.Utils
                 Top = window.Top,
                 Left = window.Left,
                 Width = window.Width,
-                Height = window.Height
+                Height = window.Height,
+                WindowState = window.WindowState
             };
         }
     }

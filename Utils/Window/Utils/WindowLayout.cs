@@ -1,3 +1,5 @@
+using System.Windows;
+
 namespace Utils.Window.Utils
 {
     /// <summary>
@@ -24,6 +26,8 @@ namespace Utils.Window.Utils
         ///     Window's width value
         /// </summary>
         public double Width { get; set; }
+
+        public WindowState WindowState { get; set; }
 
         public override string ToString()
         {

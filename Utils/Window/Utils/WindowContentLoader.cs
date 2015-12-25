@@ -57,6 +57,7 @@ namespace Utils.Window.Utils
             window.Left = layout.Left;
             window.Width = layout.Width;
             window.Height = layout.Height;
+            window.WindowState = layout.WindowState;
         }
     }
 }
