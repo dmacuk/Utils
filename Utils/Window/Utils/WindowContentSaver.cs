@@ -8,11 +8,13 @@ namespace Utils.Window.Utils
 {
     public class WindowContentSaver
     {
+        private readonly bool _saveChildren;
         private readonly System.Windows.Window _window;
 
-        public WindowContentSaver(System.Windows.Window window)
+        public WindowContentSaver(System.Windows.Window window, bool saveChildren = true)
         {
             _window = window;
+            _saveChildren = saveChildren;
         }
 
         public void Save()
@@ -28,6 +30,7 @@ namespace Utils.Window.Utils
             var layout = GetWindowSettings(_window);
             PreferenceManager.SetPreference($"Layout.{windowNameCount}", layout);
 
+            if (!_saveChildren) return;
             var controls = Shared.GetChildren<Control>(_window);
             foreach (var dataGrid in controls.OfType<DataGrid>())
             {

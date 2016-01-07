@@ -9,11 +9,13 @@ namespace Utils.Window.Utils
 {
     internal class WindowContentLoader
     {
+        private readonly bool _loadChildren;
         private readonly System.Windows.Window _window;
 
-        public WindowContentLoader(System.Windows.Window window)
+        public WindowContentLoader(System.Windows.Window window, bool loadChildren = true)
         {
             _window = window;
+            _loadChildren = loadChildren;
         }
 
         public void Load()
@@ -29,6 +31,7 @@ namespace Utils.Window.Utils
             var layout = PreferenceManager.GetPreference<WindowLayout>($"Layout.{windowNameCount}", null);
             SetWindowSettings(_window, layout);
 
+            if (!_loadChildren) return;
             var controls = Shared.GetChildren<Control>(_window);
             foreach (var dataGrid in controls.OfType<DataGrid>())
             {
