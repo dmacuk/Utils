@@ -28,6 +28,14 @@ namespace Utils.FullyObservableCollection
         /// </summary>
         public event EventHandler<ItemPropertyChangedEventArgs> ItemPropertyChanged;
 
+        protected override void ClearItems()
+        {
+            foreach (var item in Items)
+                item.PropertyChanged -= ChildPropertyChanged;
+
+            base.ClearItems();
+        }
+
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Remove ||
@@ -57,20 +65,6 @@ namespace Utils.FullyObservableCollection
             OnItemPropertyChanged(new ItemPropertyChangedEventArgs(index, e));
         }
 
-        protected override void ClearItems()
-        {
-            foreach (var item in Items)
-                item.PropertyChanged -= ChildPropertyChanged;
-
-            base.ClearItems();
-        }
-
-        private void ObserveAll()
-        {
-            foreach (var item in Items)
-                item.PropertyChanged += ChildPropertyChanged;
-        }
-
         private void ChildPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             var typedSender = (T) sender;
@@ -80,6 +74,12 @@ namespace Utils.FullyObservableCollection
                 throw new ArgumentException("Recived property notification from item not in collection");
 
             OnItemPropertyChanged(i, e);
+        }
+
+        private void ObserveAll()
+        {
+            foreach (var item in Items)
+                item.PropertyChanged += ChildPropertyChanged;
         }
     }
 

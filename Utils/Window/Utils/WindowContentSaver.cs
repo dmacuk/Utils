@@ -38,18 +38,6 @@ namespace Utils.Window.Utils
             }
         }
 
-        private static void SaveDataGrid(string windowNameCount, DataGrid dataGrid)
-        {
-            var dataGridName = dataGrid.Name;
-            if (string.IsNullOrWhiteSpace(dataGridName))
-            {
-                Debug.WriteLine("dataGrid has no Name");
-                return;
-            }
-            var columnOptions = dataGrid.GetColumOptions();
-            PreferenceManager.SetPreference($"DataGridColumnOption.{dataGridName}.{windowNameCount}", columnOptions);
-        }
-
         private static WindowLayout GetWindowSettings(System.Windows.Window window)
         {
             return new WindowLayout
@@ -60,6 +48,18 @@ namespace Utils.Window.Utils
                 Height = window.Height,
                 WindowState = window.WindowState
             };
+        }
+
+        private static void SaveDataGrid(string windowNameCount, DataGrid dataGrid)
+        {
+            var dataGridName = dataGrid.Name;
+            if (string.IsNullOrWhiteSpace(dataGridName))
+            {
+                Debug.WriteLine("dataGrid has no Name");
+                return;
+            }
+            var columnOptions = dataGrid.GetColumOptions();
+            PreferenceManager.SetPreference($"DataGridColumnOption.{dataGridName}.{windowNameCount}", columnOptions);
         }
     }
 }

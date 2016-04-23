@@ -76,9 +76,9 @@ namespace Utils.Window.Utils.Grid
         }
 
         public int DisplayIndex { get; set; }
-        public double Width { get; set; }
-        public Visibility Visibility { get; set; }
         public ListSortDirection? ListSortDescription { get; set; }
+        public Visibility Visibility { get; set; }
+        public double Width { get; set; }
 #pragma warning restore 1591
     }
 }

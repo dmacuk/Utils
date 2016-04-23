@@ -13,12 +13,19 @@ namespace Utils.File
             _fileName = fileName;
         }
 
-        public Task<T> ReadObjectAsync()
+        public static T ReadJsonString(string json)
         {
-            var t1 = new Task<T>(ReadObject);
+            using (var reader = new StringReader(json))
+            {
+                var serializer = new JsonSerializer<T>();
+                return serializer.DeserializeFromReader(reader);
+            }
+        }
 
-            t1.Start();
-            return t1;
+        public static string WriteJsonString(T obj)
+        {
+            var serializer = new JsonSerializer<T>();
+            return serializer.SerializeToString(obj);
         }
 
         public T ReadObject()
@@ -30,23 +37,13 @@ namespace Utils.File
             }
         }
 
-        public static T ReadJsonString(string json)
+        public Task<T> ReadObjectAsync()
         {
-            using (var reader = new StringReader(json))
-            {
-                var serializer = new JsonSerializer<T>();
-                return serializer.DeserializeFromReader(reader);
-            }
-        }
-
-        public Task WriteObjectAsync(T obj)
-        {
-            var t1 = new Task(() => { WriteObject(obj); });
+            var t1 = new Task<T>(ReadObject);
 
             t1.Start();
             return t1;
         }
-
 
         public void WriteObject(T obj)
         {
@@ -57,10 +54,12 @@ namespace Utils.File
             }
         }
 
-        public static string WriteJsonString(T obj)
+        public Task WriteObjectAsync(T obj)
         {
-            var serializer = new JsonSerializer<T>();
-            return serializer.SerializeToString(obj);
+            var t1 = new Task(() => { WriteObject(obj); });
+
+            t1.Start();
+            return t1;
         }
     }
 }
