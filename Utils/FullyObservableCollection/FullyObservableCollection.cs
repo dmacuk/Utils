@@ -38,19 +38,15 @@ namespace Utils.FullyObservableCollection
 
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == NotifyCollectionChangedAction.Remove ||
-                e.Action == NotifyCollectionChangedAction.Replace)
-            {
+            if ((e.Action == NotifyCollectionChangedAction.Remove) ||
+                (e.Action == NotifyCollectionChangedAction.Replace))
                 foreach (T item in e.OldItems)
                     item.PropertyChanged -= ChildPropertyChanged;
-            }
 
-            if (e.Action == NotifyCollectionChangedAction.Add ||
-                e.Action == NotifyCollectionChangedAction.Replace)
-            {
+            if ((e.Action == NotifyCollectionChangedAction.Add) ||
+                (e.Action == NotifyCollectionChangedAction.Replace))
                 foreach (T item in e.NewItems)
                     item.PropertyChanged += ChildPropertyChanged;
-            }
 
             base.OnCollectionChanged(e);
         }
@@ -67,7 +63,7 @@ namespace Utils.FullyObservableCollection
 
         private void ChildPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var typedSender = (T) sender;
+            var typedSender = (T)sender;
             var i = Items.IndexOf(typedSender);
 
             if (i < 0)

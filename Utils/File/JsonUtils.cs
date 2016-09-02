@@ -1,6 +1,6 @@
-﻿using System.IO;
+﻿using ServiceStack.Text;
+using System.IO;
 using System.Threading.Tasks;
-using ServiceStack.Text;
 
 namespace Utils.File
 {

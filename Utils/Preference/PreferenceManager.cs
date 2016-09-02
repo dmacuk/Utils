@@ -61,9 +61,7 @@ namespace Utils.Preference
         private static Dictionary<string, string> LoadPreferences()
         {
             if (System.IO.File.Exists(_fileName))
-            {
                 return _jsonUtils.ReadObject();
-            }
             return new Dictionary<string, string>();
         }
     }

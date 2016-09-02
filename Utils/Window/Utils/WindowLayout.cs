@@ -34,7 +34,7 @@ namespace Utils.Window.Utils
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((WindowLayout) obj);
+            return Equals((WindowLayout)obj);
         }
 
         public override int GetHashCode()
@@ -42,9 +42,9 @@ namespace Utils.Window.Utils
             unchecked
             {
                 var hashCode = Top.GetHashCode();
-                hashCode = (hashCode*397) ^ Left.GetHashCode();
-                hashCode = (hashCode*397) ^ Height.GetHashCode();
-                hashCode = (hashCode*397) ^ Width.GetHashCode();
+                hashCode = (hashCode * 397) ^ Left.GetHashCode();
+                hashCode = (hashCode * 397) ^ Height.GetHashCode();
+                hashCode = (hashCode * 397) ^ Width.GetHashCode();
                 return hashCode;
             }
         }
