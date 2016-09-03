@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Utils.ObservableDictionary
 {
-    internal class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, INotifyCollectionChanged,
+    public class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, INotifyCollectionChanged,
         INotifyPropertyChanged
     {
         private const string CountString = "Count";
